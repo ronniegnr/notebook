@@ -1,7 +1,6 @@
 package bd.com.ronnie.blogservice.domain;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -27,7 +26,7 @@ import java.util.List;
 @Table(name = "post")
 public class Post {
 
-    public enum Status { ACTIVE, INACTIVE }
+    public enum Status {ACTIVE, INACTIVE}
 
     private int id;
     private String title;
@@ -60,7 +59,7 @@ public class Post {
         this.id = id;
     }
 
-    @NotBlank
+    @NotNull
     @Length(max = 1023)
     @Column(name = "title")
     public String getTitle() {
@@ -71,7 +70,7 @@ public class Post {
         this.title = title;
     }
 
-    @NotBlank
+    @NotNull
     @Length(max = 65535)
     @Column(name = "value")
     public String getValue() {

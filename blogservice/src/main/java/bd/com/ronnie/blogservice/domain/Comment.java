@@ -18,7 +18,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-@Table(name = "comment")
+//@Table(name = "comment")
 public class Comment {
 
     public enum Status {ACTIVE, INACTIVE}
@@ -71,7 +71,7 @@ public class Comment {
     }
 
     @NotBlank
-    @Length(max = 65535)
+    @Length(max = 21844)
     @Column(name = "content")
     public String getContent() {
         return content;
