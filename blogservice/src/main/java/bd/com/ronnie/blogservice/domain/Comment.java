@@ -1,7 +1,6 @@
 package bd.com.ronnie.blogservice.domain;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -18,14 +18,12 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
-//@Table(name = "comment")
+@Table(name = "comment")
 public class Comment {
 
     public enum Status {ACTIVE, INACTIVE}
 
     private int id;
-    private int userId;
-    private int postId;
     private String content;
     private Status status;
     private Timestamp created;
@@ -51,28 +49,8 @@ public class Comment {
     }
 
     @NotNull
-    @Column(name = "user_id", insertable = false, updatable = false)
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    @NotNull
-    @Column(name = "post_id", insertable = false, updatable = false)
-    public int getPostId() {
-        return postId;
-    }
-
-    public void setPostId(int postId) {
-        this.postId = postId;
-    }
-
-    @NotBlank
-    @Length(max = 21844)
-    @Column(name = "content")
+    @Length(min = 5)
+    @Column(name = "content", columnDefinition = "TEXT")
     public String getContent() {
         return content;
     }
@@ -82,7 +60,6 @@ public class Comment {
     }
 
     @NotNull
-    @Length(max = 63)
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     public Status getStatus() {
@@ -133,18 +110,4 @@ public class Comment {
         this.post = post;
     }
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-            "id=" + id +
-            ", userId=" + userId +
-            ", postId=" + postId +
-            ", content='" + content + '\'' +
-            ", status=" + status +
-            ", created=" + created +
-            ", updated=" + updated +
-            ", user=" + user +
-            ", post=" + post +
-            '}';
-    }
 }

@@ -193,23 +193,4 @@ public class User {
         this.comments = comments;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", sex='" + sex + '\'' +
-                ", avatar='" + avatar + '\'' +
-                ", role=" + role +
-                ", status=" + status +
-                ", created=" + created +
-                ", updated=" + updated +
-                ", posts=" + posts +
-                '}';
-    }
-
 }

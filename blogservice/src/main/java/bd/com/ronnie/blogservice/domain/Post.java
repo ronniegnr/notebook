@@ -1,6 +1,5 @@
 package bd.com.ronnie.blogservice.domain;
 
-import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
@@ -18,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -60,8 +60,8 @@ public class Post {
     }
 
     @NotNull
-    @Length(max = 1023)
-    @Column(name = "title")
+    @Size(min = 10, max = 2047)
+    @Column(name = "title", columnDefinition = "varchar(2047)")
     public String getTitle() {
         return title;
     }
@@ -71,8 +71,7 @@ public class Post {
     }
 
     @NotNull
-    @Length(max = 65535)
-    @Column(name = "value")
+    @Column(name = "value", columnDefinition = "TEXT")
     public String getValue() {
         return value;
     }
