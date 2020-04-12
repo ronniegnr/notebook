@@ -1,51 +1,38 @@
 package bd.com.ronnie.blogservice.domain;
 
-import org.hibernate.validator.constraints.Length;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
-import java.util.Date;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "tag")
-public class Tag {
+public class Tag extends AbstractAuditingEntity {
 
-    private int id;
-    private String name; // this will be show in the page
-    private String value; // this will be used as URL parameter
-    private Timestamp created;
-    private Timestamp updated;
+    @NotNull
+    @Size(min = 1, max = 255)
+    private String name;
 
+    @NotNull
+    @Size(min = 1, max = 255)
+    private String value;
+
+    @NotNull
+    private Integer postCount;
+
+    @ManyToMany(mappedBy = "tags")
     private List<Post> posts;
-    private int postCount;
 
-    public Tag() {
-        this.created = this.updated = new Timestamp(new Date().getTime());
+    protected Tag() {
     }
 
-    @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
-        return id;
+    public static Tag newObjectWithDefaults() {
+        Tag tag = new Tag();
+        tag.postCount = 0;
+        return tag;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @NotNull
-    @Length(max = 255)
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -54,9 +41,6 @@ public class Tag {
         this.name = name;
     }
 
-    @NotNull
-    @Length(max = 255)
-    @Column(name = "value")
     public String getValue() {
         return value;
     }
@@ -65,27 +49,6 @@ public class Tag {
         this.value = value;
     }
 
-    @NotNull
-    @Column(name = "created")
-    public Timestamp getCreated() {
-        return created;
-    }
-
-    public void setCreated(Timestamp created) {
-        this.created = created;
-    }
-
-    @NotNull
-    @Column(name = "updated")
-    public Timestamp getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Timestamp updated) {
-        this.updated = updated;
-    }
-
-    @ManyToMany(mappedBy = "tags")
     public List<Post> getPosts() {
         return posts;
     }
@@ -95,24 +58,12 @@ public class Tag {
     }
 
     @Transient
-    public int getPostCount() {
+    public Integer getPostCount() {
         return getPosts().size();
     }
 
-    public void setPostCount(int postCount) {
+    public void setPostCount(Integer postCount) {
         this.postCount = postCount;
     }
 
-    @Override
-    public String toString() {
-        return "Tag{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            ", value='" + value + '\'' +
-            ", created=" + created +
-            ", updated=" + updated +
-            ", posts=" + posts +
-            ", postCount=" + postCount +
-            '}';
-    }
 }

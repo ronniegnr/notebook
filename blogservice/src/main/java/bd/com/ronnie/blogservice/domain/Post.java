@@ -1,67 +1,55 @@
 package bd.com.ronnie.blogservice.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "post")
-public class Post {
+public class Post extends AbstractAuditingEntity {
 
-    public enum Status {ACTIVE, INACTIVE}
-
-    private int id;
+    @NotNull
+    @Size(min = 5, max = 1023)
     private String title;
-    private String value;
-    private Status status;
-    private Timestamp created;
-    private Timestamp updated;
 
+    @NotNull
+    @Size(min = 5, max = 2047)
+    private String topSummary;
+
+    @NotNull
+    @Column(columnDefinition = "TEXT")
+    private String content;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToMany
+    @JoinTable(name = "post_tag", joinColumns = {@JoinColumn(name = "post_id", insertable = false, updatable = false)}, inverseJoinColumns = {@JoinColumn(name = "tag_id", insertable = false, updatable = false)})
     private List<Tag> tags;
+
+    @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
-    private int valueShort;
     private int commentCount;
 
     public Post() {
         this.status = Status.ACTIVE;
-        this.created = this.updated = new Timestamp(new Date().getTime());
     }
 
-    @Id
-    @NotNull
-    @Column(name = "id", unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @NotNull
-    @Size(min = 10, max = 2047)
-    @Column(name = "title", columnDefinition = "varchar(2047)")
     public String getTitle() {
         return title;
     }
@@ -70,19 +58,22 @@ public class Post {
         this.title = title;
     }
 
-    @NotNull
-    @Column(name = "value", columnDefinition = "TEXT")
-    public String getValue() {
-        return value;
+    public String getTopSummary() {
+        return topSummary;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setTopSummary(String topSummary) {
+        this.topSummary = topSummary;
     }
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String value) {
+        this.content = value;
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -91,30 +82,6 @@ public class Post {
         this.status = status;
     }
 
-    @NotNull
-    @DateTimeFormat(pattern = "dd-MMM-yyyy")
-    @Column(name = "created")
-    public Timestamp getCreated() {
-        return created;
-    }
-
-    public void setCreated(Timestamp created) {
-        this.created = created;
-    }
-
-    @NotNull
-    @DateTimeFormat(pattern = "dd-MMM-yyyy")
-    @Column(name = "updated")
-    public Timestamp getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Timestamp updated) {
-        this.updated = updated;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     public User getUser() {
         return user;
     }
@@ -123,8 +90,6 @@ public class Post {
         this.user = user;
     }
 
-    @ManyToMany
-    @JoinTable(name = "post_tag", joinColumns = {@JoinColumn(name = "post_id", insertable = false, updatable = false)}, inverseJoinColumns = {@JoinColumn(name = "tag_id", insertable = false, updatable = false)})
     public List<Tag> getTags() {
         return tags;
     }
@@ -133,7 +98,6 @@ public class Post {
         this.tags = tags;
     }
 
-    @OneToMany(mappedBy = "post")
     public List<Comment> getComments() {
         return comments;
     }
@@ -142,15 +106,14 @@ public class Post {
         this.comments = comments;
     }
 
-    @Transient
-    public String getValueShort() {
-        int valueLength = getValue().length();
-        return getValue().substring(0, valueLength > 800 ? 800 : valueLength) + "...";
+    public int getCommentCount() {
+        return commentCount;
     }
 
-    @Transient
-    public int getCommentCount() {
-        return getComments().size();
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
+
+    public enum Status {ACTIVE, INACTIVE}
 
 }

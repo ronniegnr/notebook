@@ -1,0 +1,9 @@
+a separate project.
+
+store all my lr_tc notes.
+
+each will be a single entry, each note in each file.
+
+sytax analyzer supported.
+
+search indexed with elasticsearch.

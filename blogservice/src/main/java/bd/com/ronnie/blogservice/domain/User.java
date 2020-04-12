@@ -1,70 +1,70 @@
 package bd.com.ronnie.blogservice.domain;
 
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import java.sql.Timestamp;
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
-public class User {
+public class User extends AbstractAuditingEntity {
 
-    public enum Sex {MALE, FEMALE}
-
-    public enum Role {USER, ADMIN}
-
-    public enum Status {PENDING, ACTIVE, INACTIVE}
-
-    private int id;
+    @NotNull
+    @Size(min = 1, max = 255)
     private String name;
-    private String password;
-    private String email;
-    private String phone;
-    private Date dateOfBirth;
-    private String avatar;
-    private Sex sex;
-    private Role role;
-    private Status status;
-    private Timestamp created;
-    private Timestamp updated;
 
+    @NotNull
+    @Size(min = 5, max = 255)
+    private String password;
+
+    @NotNull
+    @Size(min = 5, max = 255)
+    @Column(unique = true)
+    private String email;
+
+    @NotNull
+    @Size(min = 5, max = 255)
+    @Column(unique = true)
+    private String phone;
+
+    @DateTimeFormat(pattern = "dd-MMM-yyyy")
+    private Date dateOfBirth;
+
+    private String avatar;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @OneToMany(mappedBy = "user")
     private List<Post> posts;
+
+    @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
-    public User() {
-        this.role = Role.USER;
-        this.status = Status.PENDING;
-        this.created = new Timestamp(new Date().getTime());
+    protected User() {
     }
 
-    @Id
-    @NotNull
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true)
-    public int getId() {
-        return id;
+    public User newObjectWithDefaults() {
+        User user = new User();
+        user.status = Status.INACTIVE;
+        user.role = Role.USER;
+        return user;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @NotBlank
-    @Length(max = 255)
-    @Column(name = "name")
     public String getName() {
         return name;
     }
@@ -73,9 +73,6 @@ public class User {
         this.name = name;
     }
 
-    @NotEmpty
-    @Length(max = 512)
-    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -84,9 +81,6 @@ public class User {
         this.password = password;
     }
 
-    @NotBlank
-    @Length(max = 255)
-    @Column(name = "email", unique = true)
     public String getEmail() {
         return email;
     }
@@ -95,8 +89,6 @@ public class User {
         this.email = email;
     }
 
-    @Length(max = 255)
-    @Column(name = "phone")
     public String getPhone() {
         return phone;
     }
@@ -105,7 +97,6 @@ public class User {
         this.phone = phone;
     }
 
-    @Column(name = "date_of_birth")
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
@@ -114,17 +105,14 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sex")
-    public Sex getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setSex(Sex sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
-    @Column(name = "avatar", length = 255)
     public String getAvatar() {
         return avatar;
     }
@@ -133,9 +121,6 @@ public class User {
         this.avatar = avatar;
     }
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "role")
     public Role getRole() {
         return role;
     }
@@ -144,9 +129,6 @@ public class User {
         this.role = role;
     }
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status")
     public Status getStatus() {
         return status;
     }
@@ -155,27 +137,6 @@ public class User {
         this.status = status;
     }
 
-    @NotNull
-    @Column(name = "created")
-    public Timestamp getCreated() {
-        return created;
-    }
-
-    public void setCreated(Timestamp created) {
-        this.created = created;
-    }
-
-    @NotNull
-    @Column(name = "updated")
-    public Timestamp getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Timestamp updated) {
-        this.updated = updated;
-    }
-
-    @OneToMany(mappedBy = "user") // user is property of relationship holding table
     public List<Post> getPosts() {
         return posts;
     }
@@ -184,7 +145,6 @@ public class User {
         this.posts = posts;
     }
 
-    @OneToMany(mappedBy = "user")
     public List<Comment> getComments() {
         return comments;
     }
@@ -192,5 +152,11 @@ public class User {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+    public enum Gender {MALE, FEMALE}
+
+    public enum Role {USER, ADMIN}
+
+    public enum Status {PENDING, ACTIVE, INACTIVE}
 
 }
