@@ -55,7 +55,7 @@ public class User extends AbstractAuditingEntity {
     @OneToMany(mappedBy = "user")
     private List<Comment> comments;
 
-    protected User() {
+    private User() {
     }
 
     public User newObjectWithDefaults() {

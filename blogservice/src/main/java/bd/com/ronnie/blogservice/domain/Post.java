@@ -46,8 +46,13 @@ public class Post extends AbstractAuditingEntity {
 
     private int commentCount;
 
-    public Post() {
-        this.status = Status.ACTIVE;
+    private Post() {
+    }
+
+    public Post newObjectWithDefaults() {
+        Post post = new Post();
+        post.status = Status.ACTIVE;
+        return post;
     }
 
     public String getTitle() {

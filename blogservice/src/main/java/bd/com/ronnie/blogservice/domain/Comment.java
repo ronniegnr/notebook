@@ -30,7 +30,7 @@ public class Comment extends AbstractAuditingEntity {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    protected Comment() {
+    private Comment() {
     }
 
     public static Comment newObjectWithDefaults() {

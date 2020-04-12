@@ -24,7 +24,7 @@ public class Tag extends AbstractAuditingEntity {
     @ManyToMany(mappedBy = "tags")
     private List<Post> posts;
 
-    protected Tag() {
+    private Tag() {
     }
 
     public static Tag newObjectWithDefaults() {
