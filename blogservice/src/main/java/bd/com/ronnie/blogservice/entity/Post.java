@@ -1,4 +1,4 @@
-package bd.com.ronnie.blogservice.domain;
+package bd.com.ronnie.blogservice.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
