@@ -1,57 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout/layout}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
 <head>
     <title>Blog</title>
 </head>
 <body>
 
-        <div class="row" layout:fragment="content">
-            <main class="posts-listing col-lg-8">
-                <div class="container">
-                    <div class="row">
+<!-- blog-posts -->
+<div class="blog-posts readable-content" layout:fragment="content">
 
-                        <!-- post -->
-                        <div class="post col-xl-6" th:each="blogHomePost : ${blogHomePagedPosts.blogHomePosts}">
-                            <div class="post-details">
-                                <a href="post.html"><h3 class="h4" th:text="${blogHomePost.title}"></h3></a>
-                                <p class="text-muted" th:text="${blogHomePost.topSummary}"></p>
-                                <div class="post-footer d-flex align-items-center">
-                                    <a href="#" class="author d-flex align-items-center flex-wrap">
-                                        <div class="title"><span th:text="${blogHomePost.author}"></span></div>
-                                    </a>
-                                    <div class="date" th:text="${blogHomePost.createdAt}"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div th:replace="fragment/pager :: pager">
-                        pagination will be replaced here
-                    </div>
-
-                </div>
-            </main>
-
-            <aside class="col-lg-4">
-
-                <div th:replace="fragment/client/search_widget :: search_widget">
-                    search widget will be replaced here
-                </div>
-
-                <div th:replace="fragment/client/popular_posts_widget :: popular_posts_widget">
-                    popular posts will be replaced here
-                </div>
-
-                <div th:replace="fragment/client/tags_widget :: tags_widget">
-                    tags widget will be replaced here
-                </div>
-
-            </aside>
-
+    <!-- post -->
+    <article class="post type-post hentry" th:each="blogHomePost : ${blogHomePagedPosts.blogHomePosts}">
+        <header class="entry-header">
+            <h1 class="entry-title">
+                <a href="blog-single.html" th:title="${blogHomePost.title}" rel="bookmark" th:text="${blogHomePost.title}"></a>
+            </h1>
+        </header>
+        <footer class="entry-meta">
+            posted in <a href="#" title="View all posts in Spring Boot">Spring Boot</a> on <a href="#" title="11:15 pm" rel="bookmark">
+            <time class="entry-date" datetime="2012-11-09T23:15:57+00:00">November 9, 2020</time>
+        </a>
+            <span class="by-author">by <span class="author vcard"><a class="url fn n" href="#" th:title="'View all posts by ' + ${blogHomePost.author}" rel="author" th:text="${blogHomePost.author}"></a></span></span>
+        </footer>
+        <div class="entry-content">
+            <div th:utext="${blogHomePost.topSummary}" th:remove="tag"></div>
+            <a href="blog-single.html" class="more-link" th:title="'Continue reading ' + ${blogHomePost.title}">Continue reading <span class="meta-nav">→</span></a></p>
         </div>
+    </article>
+    <!-- /post -->
+
+    <!-- pager -->
+    <div th:replace="fragment/pager :: pager(${blogHomePagedPosts.pager})"></div>
+    <!-- /pager -->
+
+</div>
+<!-- /blog-posts -->
 
 </body>
 </html>
