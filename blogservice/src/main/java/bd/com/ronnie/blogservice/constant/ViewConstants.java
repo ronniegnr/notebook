@@ -1,6 +1,6 @@
 package bd.com.ronnie.blogservice.constant;
 
-public class ViewConstants {
+public final class ViewConstants {
 
     private static final String CLIENT_PATH = "client/";
     private static final String ADMIN_PATH = "admin/";

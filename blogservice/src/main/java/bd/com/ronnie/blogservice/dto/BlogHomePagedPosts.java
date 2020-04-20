@@ -8,10 +8,11 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static bd.com.ronnie.blogservice.constant.PageConstants.BLOG_HOME_URL_WITH_PAGE;
+
 public class BlogHomePagedPosts {
 
     private List<BlogHomePost> blogHomePosts;
-
     private Pager<Post> pager;
 
     private BlogHomePagedPosts() {
@@ -22,7 +23,7 @@ public class BlogHomePagedPosts {
         blogHomePagedPosts.blogHomePosts = postPage.get()
                 .map(BlogHomePost::from)
                 .collect(Collectors.toList());
-        blogHomePagedPosts.pager = new Pager<>(postPage);
+        blogHomePagedPosts.pager = new Pager<>(postPage, BLOG_HOME_URL_WITH_PAGE);
         return blogHomePagedPosts;
     }
 
