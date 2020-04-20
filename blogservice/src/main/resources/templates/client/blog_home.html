@@ -8,11 +8,11 @@
 <!-- blog-posts -->
 <div class="blog-posts readable-content" layout:fragment="content">
 
-    <!-- post -->
+    <!-- posts -->
     <article class="post type-post hentry" th:each="blogHomePost : ${blogHomePagedPosts.blogHomePosts}">
         <header class="entry-header">
             <h1 class="entry-title">
-                <a href="blog-single.html" th:title="${blogHomePost.title}" rel="bookmark" th:text="${blogHomePost.title}"></a>
+                <a rel="bookmark" th:href="@{${blogHomePagedPosts.postDetailURLPart} + ${blogHomePost.id}}" th:title="${blogHomePost.title}" th:text="${blogHomePost.title}"></a>
             </h1>
         </header>
         <footer class="entry-meta">
@@ -23,10 +23,10 @@
         </footer>
         <div class="entry-content">
             <div th:utext="${blogHomePost.topSummary}" th:remove="tag"></div>
-            <a href="blog-single.html" class="more-link" th:title="'Continue reading ' + ${blogHomePost.title}">Continue reading <span class="meta-nav">→</span></a></p>
+            <a class="more-link" th:href="@{${blogHomePagedPosts.postDetailURLPart} + ${blogHomePost.id}}" th:title="'Continue reading ' + ${blogHomePost.title}">Continue reading <span class="meta-nav">→</span></a></p>
         </div>
     </article>
-    <!-- /post -->
+    <!-- /posts -->
 
     <!-- pager -->
     <div th:replace="fragment/pager :: pager(${blogHomePagedPosts.pager})"></div>

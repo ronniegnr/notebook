@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="layout/layout">
+<head>
+    <title>Blog</title>
+</head>
+<body>
+
+<!-- post -->
+<div class="blog-single readable-content" layout:fragment="content">
+    <article class="post type-post format-standard hentry">
+        <header class="entry-header">
+            <h1 class="entry-title" th:text="${postDetail.title}">Use MySQL in a Spring Boot application</h1>
+        </header>
+        <div class="entry-meta">posted in <a href="#" title="View all posts in Web Design">Web Design</a> on <a href="#" title="11:15 pm" rel="bookmark"> <time class="entry-date" datetime="2012-11-09T23:15:57+00:00">November 9, 2012</time>
+        </a>
+            <span class="by-author"> by <span class="author vcard"><a class="url fn n" href="#" title="View all posts by ahmetsali" rel="author">Albert Einstein</a></span></span>.
+            <span class="edit-link"><a class="post-edit-link" href="#" title="Edit Post">Edit</a></span>
+        </div>
+
+        <!-- post content -->
+        <div class="entry-content" th:utext="${postDetail.content}"></div>
+        <!-- /post content -->
+
+        <!-- tags -->
+        <footer class="entry-meta"><a href="#" rel="tag">design</a>, <a href="#" rel="tag">responsive</a>, <a href="#" rel="tag">think</a></footer>
+        <!-- /tags -->
+
+    </article>
+
+    <!-- next-prev posts -->
+    <nav class="nav-single row-fluid">
+        <div class="nav-previous span6">
+            <h4>PREVIOUS POST</h4>
+            <a href="#" rel="prev"><span class="meta-nav">←</span> Adding A Personal Touch To Your Web Design</a>
+        </div>
+        <div class="nav-next span6">
+            <h4>NEXT POST</h4>
+            <a href="#" rel="next">How To Build Long-Term Client Relationships <span class="meta-nav">→</span></a>
+        </div>
+    </nav>
+    <!-- /next-prev posts -->
+
+</div>
+
+</body>
+</html>
