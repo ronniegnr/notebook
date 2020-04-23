@@ -1,0 +1,18 @@
+version: '3.5'
+
+volumes:
+    mysql_data:
+
+services:
+
+    mysql:
+        image: mysql:5.7.29
+        environment:
+            - MYSQL_DATABASE=notebook_blogservice_db
+            - MYSQL_ROOT_PASSWORD=root
+        ports:
+            - "3307:3306"
+        restart: always
+        volumes:
+            - mysql_data:/var/lib/mysql
+
