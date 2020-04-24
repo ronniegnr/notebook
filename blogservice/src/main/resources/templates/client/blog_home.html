@@ -15,15 +15,14 @@
                 <a rel="bookmark" th:href="@{${blogHomePagedPosts.postDetailURLPart} + ${blogHomePost.id}}" th:title="${blogHomePost.title}" th:text="${blogHomePost.title}"></a>
             </h1>
         </header>
-        <footer class="entry-meta">
-            posted in <a href="#" title="View all posts in Spring Boot">Spring Boot</a> on <a href="#" title="11:15 pm" rel="bookmark">
-            <time class="entry-date" datetime="2012-11-09T23:15:57+00:00">November 9, 2020</time>
-        </a>
-            <span class="by-author">by <span class="author vcard"><a class="url fn n" href="#" th:title="'View all posts by ' + ${blogHomePost.author}" rel="author" th:text="${blogHomePost.author}"></a></span></span>
-        </footer>
+        <div class="entry-meta">
+            posted <!--in <a th:href="@{/}" title="View all posts in Spring Boot">Spring Boot</a> -->on
+            <time class="entry-date" th:datetime="${blogHomePost.postDate}" th:text="${blogHomePost.postDate}"></time>
+            <span class="by-author">by <span class="author vcard"><a class="url fn n" th:href="@{/}" th:title="'View all posts by ' + ${blogHomePost.authorName}" rel="author" th:text="${blogHomePost.authorName}"></a></span></span>
+        </div>
         <div class="entry-content">
-            <div th:utext="${blogHomePost.topSummary}" th:remove="tag"></div>
-            <a class="more-link" th:href="@{${blogHomePagedPosts.postDetailURLPart} + ${blogHomePost.id}}" th:title="'Continue reading ' + ${blogHomePost.title}">Continue reading <span class="meta-nav">→</span></a></p>
+            <!--<div th:utext="${blogHomePost.topSummary}" th:remove="tag"></div>-->
+            <!--<a class="more-link" th:href="@{${blogHomePagedPosts.postDetailURLPart} + ${blogHomePost.id}}" th:title="'Continue reading ' + ${blogHomePost.title}">Continue reading <span class="meta-nav">→</span></a></p>-->
         </div>
     </article>
     <!-- /posts -->

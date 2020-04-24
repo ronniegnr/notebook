@@ -2,6 +2,7 @@ package bd.com.ronnie.blogservice.dto;
 
 import bd.com.ronnie.blogservice.entity.Post;
 import bd.com.ronnie.blogservice.entity.Tag;
+import bd.com.ronnie.blogservice.utility.DateTimeUtility;
 
 import java.time.Instant;
 import java.util.List;
@@ -17,7 +18,7 @@ public class PostDetail {
     private String authorName;
     private Long authorId;
     private List<Tag> tags;
-    private Instant postDate;
+    private String postDate;
 
     private PostDetail() {
     }
@@ -31,7 +32,7 @@ public class PostDetail {
         postDetail.authorName = post.getUser().getName();
         postDetail.authorId = post.getUser().getId();
         postDetail.tags = post.getTags();
-        postDetail.postDate = post.getCreatedAt();
+        postDetail.postDate = DateTimeUtility.fromInstant(post.getCreatedAt());
 
         return postDetail;
     }
@@ -60,7 +61,7 @@ public class PostDetail {
         return tags;
     }
 
-    public Instant getPostDate() {
+    public String getPostDate() {
         return postDate;
     }
 

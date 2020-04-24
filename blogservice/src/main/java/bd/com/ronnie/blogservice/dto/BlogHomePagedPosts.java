@@ -8,8 +8,8 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static bd.com.ronnie.blogservice.constant.PageConstants.POST_DETAIL_URL_PART;
-import static bd.com.ronnie.blogservice.constant.PageConstants.POST_HOME_URL_WITH_PAGE;
+import static bd.com.ronnie.blogservice.constant.URLConstants.POST_DETAIL_URL_PART;
+import static bd.com.ronnie.blogservice.constant.URLConstants.POST_HOME_URL_WITH_PAGE;
 
 public class BlogHomePagedPosts {
 

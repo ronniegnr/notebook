@@ -6,6 +6,7 @@ volumes:
 services:
 
     mysql:
+        container_name: notebook_blogservice-mysql
         image: mysql:5.7.29
         environment:
             - MYSQL_DATABASE=notebook_blogservice_db

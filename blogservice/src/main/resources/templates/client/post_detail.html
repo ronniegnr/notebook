@@ -11,10 +11,10 @@
         <header class="entry-header">
             <h1 class="entry-title" th:text="${postDetail.title}">Use MySQL in a Spring Boot application</h1>
         </header>
-        <div class="entry-meta">posted in <a href="#" title="View all posts in Web Design">Web Design</a> on <a href="#" title="11:15 pm" rel="bookmark"> <time class="entry-date" datetime="2012-11-09T23:15:57+00:00">November 9, 2012</time>
-        </a>
-            <span class="by-author"> by <span class="author vcard"><a class="url fn n" href="#" title="View all posts by ahmetsali" rel="author">Albert Einstein</a></span></span>.
-            <span class="edit-link"><a class="post-edit-link" href="#" title="Edit Post">Edit</a></span>
+        <div class="entry-meta">
+            posted <!--in <a th:href="@{/}" title="View all posts in Spring Boot">Spring Boot</a> -->on
+            <time class="entry-date" th:datetime="${postDetail.postDate}" th:text="${postDetail.postDate}"></time>
+            <span class="by-author">by <span class="author vcard"><a class="url fn n" th:href="@{/}" th:title="'View all posts by ' + ${postDetail.authorName}" rel="author" th:text="${postDetail.authorName}"></a></span></span>
         </div>
 
         <!-- post content -->
@@ -22,13 +22,13 @@
         <!-- /post content -->
 
         <!-- tags -->
-        <footer class="entry-meta"><a href="#" rel="tag">design</a>, <a href="#" rel="tag">responsive</a>, <a href="#" rel="tag">think</a></footer>
+        <!--<footer class="entry-meta"><a href="#" rel="tag">design</a>, <a href="#" rel="tag">responsive</a>, <a href="#" rel="tag">think</a></footer>-->
         <!-- /tags -->
 
     </article>
 
     <!-- next-prev posts -->
-    <nav class="nav-single row-fluid">
+    <!--<nav class="nav-single row-fluid">
         <div class="nav-previous span6">
             <h4>PREVIOUS POST</h4>
             <a href="#" rel="prev"><span class="meta-nav">←</span> Adding A Personal Touch To Your Web Design</a>
@@ -37,7 +37,7 @@
             <h4>NEXT POST</h4>
             <a href="#" rel="next">How To Build Long-Term Client Relationships <span class="meta-nav">→</span></a>
         </div>
-    </nav>
+    </nav>-->
     <!-- /next-prev posts -->
 
 </div>

@@ -2,8 +2,8 @@ package bd.com.ronnie.blogservice.model;
 
 import bd.com.ronnie.blogservice.entity.Post;
 import bd.com.ronnie.blogservice.entity.Tag;
+import bd.com.ronnie.blogservice.utility.DateTimeUtility;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,9 +12,10 @@ public class BlogHomePost {
     private Long id;
     private String title;
     private String topSummary;
-    private String author;
+    private String authorName;
     private Long authorId;
-    private Instant createdAt;
+
+    private String postDate;
     private List<Tag> tags;
 
     private BlogHomePost() {
@@ -25,9 +26,9 @@ public class BlogHomePost {
         blogHomePost.id = post.getId();
         blogHomePost.title = post.getTitle();
         blogHomePost.topSummary = post.getTopSummary();
-        blogHomePost.author = post.getUser().getName();
+        blogHomePost.authorName = post.getUser().getName();
         blogHomePost.authorId = post.getUser().getId();
-        blogHomePost.createdAt = post.getCreatedAt();
+        blogHomePost.postDate = DateTimeUtility.fromInstant(post.getCreatedAt());
         blogHomePost.tags = post.getTags();
         return blogHomePost;
     }
@@ -50,16 +51,16 @@ public class BlogHomePost {
         return topSummary;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorName() {
+        return authorName;
     }
 
     public Long getAuthorId() {
         return authorId;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
+    public String getPostDate() {
+        return postDate;
     }
 
     public List<Tag> getTags() {
