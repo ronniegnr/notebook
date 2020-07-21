@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown Demo</title>
+    <link rel="stylesheet" type="text/css" href="markdown/simplemde.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <script src="markdown/simplemde.min.js"></script>
+    <script src="markdown/marked.min.js"></script>
+</head>
+<body>
+
+<textarea id="article-editor"></textarea>
+
+<script type="text/javascript">
+    // simplemde markdown editor config
+    var simplemde = new SimpleMDE({
+        element: $("#article-editor")[0],
+        autofocus: true,
+        spellChecker: false,
+        status: false,
+        tabSize: 4,
+        toolbar: ["bold", "italic", "heading", "quote", "unordered-list", "ordered-list", "link", "image", "preview", "side-by-side", "fullscreen",
+            {
+                name: "guide",
+                action: function openInNewTab() {
+                    var url = "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet";
+                    var win = window.open(url, '_blank');
+                    win.focus();
+                },
+                className: "fa fa-question-circle",
+                title: "Markdown Guide"
+            }],
+        previewRender: function(plainText) {
+            return "<div class='markdown-body'>" + markedParser(plainText) + "</div>";
+        },
+    });
+    function markedParser(plainText) {
+        marked.setOptions({
+            renderer: new marked.Renderer(),
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: false,
+            highlight: function (code) {
+                return hljs.highlightAuto(code).value;
+            }
+        });
+        return marked(plainText);
+    }
+</script>
+
+</body>
+</html>

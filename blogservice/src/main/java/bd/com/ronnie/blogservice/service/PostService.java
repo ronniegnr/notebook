@@ -2,7 +2,7 @@ package bd.com.ronnie.blogservice.service;
 
 import bd.com.ronnie.blogservice.dto.BlogHomePagedPosts;
 import bd.com.ronnie.blogservice.dto.PostDetail;
-import bd.com.ronnie.blogservice.entity.Post;
+import bd.com.ronnie.blogservice.domain.Post;
 import bd.com.ronnie.blogservice.exception.ResourceNotFoundException;
 import bd.com.ronnie.blogservice.repository.PostRepository;
 import org.springframework.data.domain.Page;

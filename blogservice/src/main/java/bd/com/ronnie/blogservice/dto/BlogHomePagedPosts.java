@@ -1,6 +1,6 @@
 package bd.com.ronnie.blogservice.dto;
 
-import bd.com.ronnie.blogservice.entity.Post;
+import bd.com.ronnie.blogservice.domain.Post;
 import bd.com.ronnie.blogservice.model.BlogHomePost;
 import bd.com.ronnie.blogservice.model.Pager;
 import org.springframework.data.domain.Page;

@@ -1,6 +1,6 @@
 package bd.com.ronnie.blogservice.repository;
 
-import bd.com.ronnie.blogservice.entity.Post;
+import bd.com.ronnie.blogservice.domain.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;

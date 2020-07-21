@@ -1,10 +1,9 @@
 package bd.com.ronnie.blogservice.dto;
 
-import bd.com.ronnie.blogservice.entity.Post;
-import bd.com.ronnie.blogservice.entity.Tag;
+import bd.com.ronnie.blogservice.domain.Post;
+import bd.com.ronnie.blogservice.domain.Tag;
 import bd.com.ronnie.blogservice.utility.DateTimeUtility;
 
-import java.time.Instant;
 import java.util.List;
 
 /**

@@ -1,4 +1,4 @@
-package bd.com.ronnie.blogservice.entity;
+package bd.com.ronnie.blogservice.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
