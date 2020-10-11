@@ -34,6 +34,7 @@ public class PostController {
         return POSTS_HOME_VIEW;
     }
 
+
     @GetMapping("{post_id}")
     public String blog_post(@PathVariable(name = "post_id") Long postId, Model model) throws ResourceNotFoundException {
         PostDetail postDetail = postService.getPostDetail(postId);
