@@ -1,9 +1,10 @@
 package bd.com.ronnie.hisab
 
+import bd.com.ronnie.hisab.model.AccountHead
+import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface AccountHeadRepository  {
-
+interface AccountHeadRepository: CrudRepository<AccountHead, Long>  {
 
 }
