@@ -45,6 +45,8 @@ class Transaction() {
     @get:Column(name = "updated")
     var updated: LocalDateTime? = null
 
+//    constructor()
+
     enum class Status { ACTIVE, INACTIVE }
 
 }

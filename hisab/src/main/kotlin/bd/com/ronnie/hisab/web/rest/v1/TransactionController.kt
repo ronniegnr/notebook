@@ -1,8 +1,11 @@
 package bd.com.ronnie.hisab.web.rest.v1
 
-import bd.com.ronnie.hisab.AccountHeadRepository
+import bd.com.ronnie.hisab.repository.AccountHeadRepository
 import bd.com.ronnie.hisab.domain.AccountHead
+import bd.com.ronnie.hisab.model.receive.TransactionEntry
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -10,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("v1/transactions")
 class TransactionController(private val accountHeadRepository: AccountHeadRepository) {
 
-    /*@PostMapping("")
-    fun create(@RequestBody transactionEntry: TransactionEntry): {
-
-    }*/
+    @PostMapping("")
+    fun create(@RequestBody transactionEntry: TransactionEntry): TransactionEntry {
+        return transactionEntry
+    }
 
     @GetMapping("crash")
     fun crash(): Nothing = throw RuntimeException("Showcasing Exception cases for Sentry entry")

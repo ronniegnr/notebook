@@ -1,4 +1,4 @@
-package bd.com.ronnie.hisab
+package bd.com.ronnie.hisab.repository
 
 import bd.com.ronnie.hisab.domain.AccountHead
 import org.springframework.data.repository.CrudRepository
