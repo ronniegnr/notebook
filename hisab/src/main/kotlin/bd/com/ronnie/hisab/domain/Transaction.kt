@@ -8,8 +8,7 @@ import javax.persistence.Enumerated
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.OneToOne
+import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
@@ -21,13 +20,13 @@ class Transaction() {
     @get:Column(name = "id")
     var id: Int? = null
 
-    @get:OneToOne(cascade = arrayOf())
+    /*@get:OneToOne(cascade = arrayOf())
     @get:JoinColumn(name = "destination_account_head_id")
     var destinationAccountHead: AccountHead? = null
 
     @get:OneToOne(cascade = arrayOf())
     @get:JoinColumn(name = "source_account_head_id")
-    var sourceAccountHead: AccountHead? = null
+    var sourceAccountHead: AccountHead? = null*/
 
     @get:Column(name = "purpose")
     var purpose: String? = null
@@ -37,7 +36,11 @@ class Transaction() {
 
     @get:Enumerated(EnumType.STRING)
     @get:Column(name = "status")
-    open var status: AccountHead.Status = AccountHead.Status.ACTIVE
+    var status: AccountHead.Status = AccountHead.Status.ACTIVE
+
+    @get:OneToMany(mappedBy = "transaction")
+    var transactionDetails: List<TransactionDetail>? = null
+
 
     @get:Column(name = "created")
     var created: LocalDateTime? = LocalDateTime.now()
