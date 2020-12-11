@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("v1/transactions")
+@RequestMapping("api/v1/transactions")
 class TransactionController(private val accountHeadRepository: AccountHeadRepository) {
 
     @PostMapping("")
-    fun create(@RequestBody transactionEntry: TransactionEntry): TransactionEntry {
+    fun create(@RequestBody transactionEntry: TransactionEntry): Response {
         return transactionEntry
     }
 
